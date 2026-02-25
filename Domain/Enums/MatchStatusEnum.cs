@@ -6,5 +6,5 @@ public enum MatchStatusEnum
     InProgress = 2,
     Completed = 3,
     Postponed = 4,
-    Canceled = 5
+    Cancelled = 5
 }

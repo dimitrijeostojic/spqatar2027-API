@@ -14,8 +14,8 @@ public sealed class GetAllStadiumsRequestHandler(IStadiumRepository stadiumRepos
         var stadiums = await _stadiumRepository.GetAllStadiumsAsync(cancellationToken);
         var stadiumDtos = stadiums.Select(s => new GetAllStadiumsDto
         {
-            City = s.City,
-            StadiumName = s.StadiumName,
+            City = s.City ?? string.Empty,
+            StadiumName = s.StadiumName ?? string.Empty,
             Capacity = s.Capacity
         }).ToList();
 

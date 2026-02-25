@@ -2,6 +2,7 @@
 using Application.Group.DeleteGroup;
 using Application.Group.GetAllGroups;
 using Application.Group.GetGroupById;
+using Application.Group.GetGroupStandings;
 using Application.Group.UpdateGroup;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -29,6 +30,17 @@ public class GroupController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> GetGroupById([FromRoute] Guid publicId, CancellationToken cancellationToken)
     {
         var request = new GetGroupByIdRequest(publicId);
+        var result = await _mediator.Send(request, cancellationToken);
+        return result.ToActionResult();
+    }
+
+    [HttpGet("/group/standings/{groupPublicId:Guid}")]
+    public async Task<IActionResult> GetGroupStandingByGroupPublicId([FromRoute] Guid groupPublicId, CancellationToken cancellationToken)
+    {
+        var request = new GetGroupStandingsRequest()
+        {
+            GroupPublicId = groupPublicId
+        };
         var result = await _mediator.Send(request, cancellationToken);
         return result.ToActionResult();
     }

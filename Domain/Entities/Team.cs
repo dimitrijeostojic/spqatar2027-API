@@ -31,9 +31,9 @@ public class Team : Entity
         return this;
     }
 
-    public Team UpdateGroup(Group group)
+    public Team UpdateGroup(int groupId)
     {
-        Group = group;
+        GroupId = groupId;
         return this;
     }
 

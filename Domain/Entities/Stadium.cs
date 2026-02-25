@@ -2,10 +2,10 @@
 
 public class Stadium : Entity
 {
-    public required string StadiumName { get; set; }
-    public required string City { get; set; }
-    public required int Capacity { get; set; }
-    public ICollection<Match> Matches { get; set; } = [];
+    public string? StadiumName { get; private set; }
+    public string? City { get; private set; }
+    public int Capacity { get; private set; }
+    public ICollection<Match> Matches { get; private set; } = [];
 
     public static Stadium Create(string stadiumName, string city, int capacity)
     {

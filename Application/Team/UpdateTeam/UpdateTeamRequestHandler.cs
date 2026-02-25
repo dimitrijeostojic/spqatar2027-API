@@ -27,7 +27,7 @@ public sealed class UpdateTeamRequestHandler(ITeamRepository teamRepository, IUn
             {
                 return Result<UpdateTeamResponse>.Failure(ApplicationErrors.NotFound);
             }
-            team.UpdateGroup(group);
+            team.UpdateGroup(group.Id);
         }
         if (!string.IsNullOrEmpty(request.TeamName))
         {

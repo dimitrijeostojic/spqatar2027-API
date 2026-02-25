@@ -13,4 +13,9 @@ public sealed class StadiumRepository(ApplicationDbContext context) : IStadiumRe
     {
         return await _context.Stadiums.ToListAsync(cancellationToken);
     }
+
+    public async Task<Stadium?> GetStadiumByPublicIdAsync(Guid stadiumPublicId, CancellationToken cancellationToken)
+    {
+        return await _context.Stadiums.FirstOrDefaultAsync(s => s.PublicId == stadiumPublicId, cancellationToken);
+    }
 }

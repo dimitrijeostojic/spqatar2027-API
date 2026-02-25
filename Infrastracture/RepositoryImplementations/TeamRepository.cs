@@ -14,7 +14,7 @@ public sealed class TeamRepository(ApplicationDbContext dbContext) : ITeamReposi
         await _dbContext.Teams.AddAsync(team, cancellationToken);
     }
 
-    public async Task<Team> DeleteTeamAsync(Team team, CancellationToken cancellationToken)
+    public Team DeleteTeam(Team team, CancellationToken cancellationToken)
     {
         var item = _dbContext.Teams.Remove(team);
         return item.Entity;
@@ -28,5 +28,12 @@ public sealed class TeamRepository(ApplicationDbContext dbContext) : ITeamReposi
     public async Task<Team?> GetByPublicIdAsync(Guid teamPublicId, CancellationToken cancellationToken)
     {
         return await _dbContext.Teams.Include(x => x.Group).FirstOrDefaultAsync(x => x.PublicId == teamPublicId, cancellationToken);
+    }
+
+    public async Task<List<Team>> GetTeamsByGroupPublicId(Guid groupPublicId, CancellationToken cancellationToken)
+    {
+        var query = _dbContext.Teams.AsQueryable();
+
+        return await query.Where(t => t.Group!.PublicId == groupPublicId).ToListAsync(cancellationToken);
     }
 }
