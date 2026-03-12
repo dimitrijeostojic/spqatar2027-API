@@ -16,7 +16,8 @@ public sealed class GetAllStadiumsRequestHandler(IStadiumRepository stadiumRepos
         {
             City = s.City ?? string.Empty,
             StadiumName = s.StadiumName ?? string.Empty,
-            Capacity = s.Capacity
+            Capacity = s.Capacity,
+            PublicId = s.PublicId
         }).ToList();
 
         return Result<GetAllStadiumsResponse>.Success(new GetAllStadiumsResponse(stadiumDtos));

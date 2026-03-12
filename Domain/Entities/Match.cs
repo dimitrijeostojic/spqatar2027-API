@@ -85,16 +85,6 @@ public class Match : Entity
         Status = MatchStatusEnum.Completed;
     }
 
-    public void Cancel(string? reason = null)
-    {
-        EnsureNotFinishedOrCancelled();
-
-        if (Status != MatchStatusEnum.Scheduled)
-            throw new InvalidOperationException("Only scheduled matches can be cancelled.");
-
-        Status = MatchStatusEnum.Cancelled;
-    }
-
     public MatchStandingsDelta CalculateStandingsDelta()
     {
         if (Status != MatchStatusEnum.Completed)

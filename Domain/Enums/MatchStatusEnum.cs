@@ -3,8 +3,6 @@
 public enum MatchStatusEnum
 {
     Scheduled = 1,
-    InProgress = 2,
-    Completed = 3,
-    Postponed = 4,
-    Cancelled = 5
+    Completed = 2,
+    Cancelled = 3
 }
