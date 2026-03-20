@@ -21,11 +21,4 @@ public sealed class Result<T>
     public static Result<T> Success(T value) => new(value);
     public static Result<T> Failure(Error error) => new(error);
 
-    //public TResult ToActionResult<TResult>(
-    //    Func<T, TResult> success,
-    //    Func<Error, TResult> failure)
-    //{
-    //    return _isSuccess ? success(_value) : failure(_error);
-    //}
-
 }
