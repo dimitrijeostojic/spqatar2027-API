@@ -19,6 +19,7 @@ public static class ServiceCollectionExtensions
                     Implicit = new OpenApiOAuthFlow
                     {
                         AuthorizationUrl = new Uri(configuration["Keycloak:AuthorizationUrl"]!),
+                        TokenUrl = new Uri(configuration["Keycloak:TokenUrl"]!),
                         Scopes = new Dictionary<string, string>
                         {
                             { "openid", "openid" },
