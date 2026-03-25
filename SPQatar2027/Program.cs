@@ -2,9 +2,11 @@ using Application;
 using Infrastracture;
 using Infrastracture.Data;
 using Infrastracture.Seed;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using SPQatar2027.Behaviors;
 using SPQatar2027.Extensions;
 using SPQatar2027.Middlewares;
 
@@ -31,10 +33,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddControllers();
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
+
+builder.Services.AddHttpLogging(options =>
+{
+    options.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestPropertiesAndHeaders
+        | Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestQuery
+        | Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponsePropertiesAndHeaders
+        | Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.Duration;
+    options.CombineLogs = true;
+});
+builder.Services.AddHttpLoggingInterceptor<ErrorHttpLoggingInterceptor>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGenWithAuth(builder.Configuration);
 
 builder.Services.AddCors(options =>
@@ -50,7 +63,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddLogging();
 builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
+builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
+
 var app = builder.Build();
+
+app.UseExceptionHandler();
+app.UseHttpLogging();
 
 app.UseCors("frontend");
 
