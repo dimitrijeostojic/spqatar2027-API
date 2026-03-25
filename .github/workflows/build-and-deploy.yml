@@ -13,6 +13,7 @@ env:
   AZURE_WEBAPP_NAME: spqatar2027
   DOTNET_VERSION: '8.0.x'
   API_PROJECT_PATH: 'SPQatar2027/SPQatar2027.csproj'
+  TEST_PROJECT_PATH: 'UnitTests/UnitTests.csproj'
   PUBLISH_DIR: './publish'
   AZURE_WEBAPP_PACKAGE_PATH: './publish'
 
