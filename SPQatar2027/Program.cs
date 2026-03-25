@@ -8,15 +8,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SPQatar2027.Behaviors;
 using SPQatar2027.Extensions;
+using SPQatar2027.Logging;
 using SPQatar2027.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// --------------------
+// Database
+// --------------------
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddApplication().AddInfrastracture();
+
+// --------------------
+// Authentication / Authorization
+// --------------------
 
 builder.Services.AddAuthorization();
 
@@ -32,9 +39,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// --------------------
+// Controllers
+// --------------------
+
 builder.Services.AddControllers();
 builder.Services.AddProblemDetails();
-builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
+
+// --------------------
+// HTTP Logging
+// --------------------
 
 builder.Services.AddHttpLogging(options =>
 {
@@ -46,9 +60,23 @@ builder.Services.AddHttpLogging(options =>
 });
 builder.Services.AddHttpLoggingInterceptor<ErrorHttpLoggingInterceptor>();
 
+// --------------------
+// MediatR Behaviors
+// --------------------
+
+builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
+
+// --------------------
+// Swagger
+// --------------------
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGenWithAuth(builder.Configuration);
+
+// --------------------
+// CORS
+// --------------------
 
 builder.Services.AddCors(options =>
 {
@@ -60,17 +88,18 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddLogging();
+// --------------------
+// Exception Handling Middleware
+// --------------------
+
 builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
-builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
 
 var app = builder.Build();
 
-app.UseExceptionHandler();
-app.UseHttpLogging();
-
-app.UseCors("frontend");
+// --------------------
+// Middleware pipeline
+// --------------------
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -81,12 +110,20 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseHttpLogging();
+
+app.UseCors("frontend");
+
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// --------------------
+// Seed database
+// --------------------
 
 using (var scope = app.Services.CreateScope())
 {
