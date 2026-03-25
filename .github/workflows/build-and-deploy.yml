@@ -40,12 +40,17 @@ jobs:
           --configuration Release
           --no-restore
 
+      - name: Build Tests
+        run: dotnet build ${{ env.TEST_PROJECT_PATH }}
+         --configuration Release
+         --no-restore
+
       - name: Test
         run: dotnet test ${{ env.TEST_PROJECT_PATH }}
-          --configuration Release
-          --no-restore
-          --no-build
-          --verbosity normal
+         --configuration Release
+         --no-restore
+         --no-build
+         --verbosity normal
 
 
       - name: Publish
