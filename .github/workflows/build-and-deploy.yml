@@ -41,7 +41,7 @@ jobs:
           --no-restore
 
       - name: Test
-        run: dotnet test ${{ env.API_PROJECT_PATH }}
+        run: dotnet test ${{ env.TEST_PROJECT_PATH }}
           --configuration Release
           --no-restore
           --no-build
