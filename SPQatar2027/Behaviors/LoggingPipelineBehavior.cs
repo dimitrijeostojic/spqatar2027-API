@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Core;
+using MediatR;
 
 namespace SPQatar2027.Behaviors;
 
@@ -6,8 +7,8 @@ public sealed class LoggingPipelineBehavior<TRequest, TResponse>(
     ILogger<LoggingPipelineBehavior<TRequest, TResponse>> logger
     )
     : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>
-    where TResponse : Result
+        where TRequest : IRequest<TResponse>
+        where TResponse : Result
 {
     private readonly ILogger<LoggingPipelineBehavior<TRequest, TResponse>> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 

@@ -19,6 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
 builder.Services.AddApplication().AddInfrastracture();
 
 // --------------------
@@ -64,7 +65,7 @@ builder.Services.AddHttpLoggingInterceptor<ErrorHttpLoggingInterceptor>();
 // MediatR Behaviors
 // --------------------
 
-builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
+
 
 // --------------------
 // Swagger

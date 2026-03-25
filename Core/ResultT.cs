@@ -1,18 +1,18 @@
 ﻿namespace Core;
 
-public sealed class Result<T>
+public sealed class Result<T> : Result
 {
     public T? Value { get; }
     public Error? Error { get; }
     public bool IsSuccess => Error == Error.None;
 
-    private Result(T value)
+    private Result(T value) : base(true, Error.None)
     {
         Value = value;
         Error = Error.None;
     }
 
-    private Result(Error error)
+    private Result(Error error) : base(false, error)
     {
         Error = error;
         Value = default!;
