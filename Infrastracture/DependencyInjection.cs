@@ -15,6 +15,7 @@ public static class DependencyInjection
         services.AddScoped<ITeamRepository, TeamRepository>();
         services.AddScoped<IStadiumRepository, StadiumRepository>();
         services.AddScoped<IMatchRepository, MatchRepository>();
+        services.AddScoped<IJwtTokenRepository, JwtTokenRepository>();
         services.TryAddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
         return services;
     }

@@ -3,6 +3,8 @@ using Application.Team.Delete;
 using Application.Team.GetAll;
 using Application.Team.GetById;
 using Application.Team.Update;
+using Infrastracture.Attributes;
+using Infrastracture.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +12,7 @@ using SPQatar2027.Common;
 
 namespace SPQatar2027.Controllers;
 
-[Authorize]
+[HasPermission(Permission.AccessTeam)]
 [Route("api/[controller]")]
 [ApiController]
 public class TeamController(IMediator mediator) : ControllerBase
@@ -35,6 +37,7 @@ public class TeamController(IMediator mediator) : ControllerBase
         return result.ToActionResult();
     }
 
+    [HasPermission(Permission.CreateTeam)]
     [HttpPost]
     public async Task<IActionResult> CreateTeam([FromBody] CreateTeamRequest request, CancellationToken cancellationToken)
     {

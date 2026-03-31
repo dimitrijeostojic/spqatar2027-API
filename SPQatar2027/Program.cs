@@ -1,15 +1,18 @@
 using Application;
+using Domain.Entities;
 using Infrastracture;
 using Infrastracture.Data;
 using Infrastracture.Seed;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SPQatar2027.Behaviors;
 using SPQatar2027.Extensions;
 using SPQatar2027.Logging;
 using SPQatar2027.Middlewares;
+using SPQatar2027.OptionsSetup;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +22,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDbContext<AuthDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AuthDefaultConnection")));
 
 // --------------------
 // Register MediatR and application repositories
@@ -33,17 +39,32 @@ builder.Services.AddApplication().AddInfrastracture();
 
 builder.Services.AddAuthorization();
 
+////keycloak configuration
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(o =>
+//    {
+//        o.RequireHttpsMetadata = false;
+//        o.Audience = builder.Configuration["Authentication:Audience"];
+//        o.MetadataAddress = builder.Configuration["Authentication:MetadataAddress"]!;
+//        o.TokenValidationParameters = new TokenValidationParameters
+//        {
+//            ValidIssuer = builder.Configuration["Authentication:ValidIssuer"]
+//        };
+//    });
+
+//custom authentication configuration
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(o =>
-    {
-        o.RequireHttpsMetadata = false;
-        o.Audience = builder.Configuration["Authentication:Audience"];
-        o.MetadataAddress = builder.Configuration["Authentication:MetadataAddress"]!;
-        o.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidIssuer = builder.Configuration["Authentication:ValidIssuer"]
-        };
-    });
+    .AddJwtBearer();
+
+builder.Services.ConfigureOptions<JwtOptionsSetup>();
+builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
+builder.Services.ConfigureOptions<JwtBearerIdentityOptionsSetup>();
+
+builder.Services.AddIdentityCore<User>() //konfiguracija identity servisa
+   .AddRoles<IdentityRole>() //dodavanje podrske za role
+   //.AddTokenProvider<DataProtectorTokenProvider<User>>("") //dodavanje token provajdera
+   .AddEntityFrameworkStores<AuthDbContext>() //podesavanje entity framework skladista
+   .AddDefaultTokenProviders(); //dodavanje podrazumevanih token provajdera
 
 // --------------------
 // Controllers
@@ -78,7 +99,8 @@ builder.Services.AddHttpLoggingInterceptor<ErrorHttpLoggingInterceptor>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGenWithAuth(builder.Configuration);
+//builder.Services.AddSwaggerGenWithAuthKeycloak(builder.Configuration);
+builder.Services.AddSwaggerGenWithAuthCustom();
 
 // --------------------
 // CORS
