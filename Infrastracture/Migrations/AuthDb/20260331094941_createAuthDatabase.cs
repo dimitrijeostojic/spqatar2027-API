@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Infrastracture.Migrations.AuthDb
+namespace Infrastructure.Migrations.AuthDb
 {
     /// <inheritdoc />
     public partial class createAuthDatabase : Migration

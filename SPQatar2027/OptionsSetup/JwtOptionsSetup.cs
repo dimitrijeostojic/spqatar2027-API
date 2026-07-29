@@ -1,4 +1,4 @@
-﻿using Infrastracture.Options;
+﻿using Infrastructure.Options;
 using Microsoft.Extensions.Options;
 
 namespace SPQatar2027.OptionsSetup;

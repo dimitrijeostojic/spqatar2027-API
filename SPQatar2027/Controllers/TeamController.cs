@@ -4,7 +4,7 @@ using Application.Team.GetAll;
 using Application.Team.GetById;
 using Application.Team.Update;
 using Infrastracture.Attributes;
-using Infrastracture.Constants;
+using Infrastructure.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

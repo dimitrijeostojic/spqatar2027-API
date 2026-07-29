@@ -1,10 +1,10 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
 using Domain.RepositoryInterfaces;
-using Infrastracture.Data;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastracture.RepositoryImplementations;
+namespace Infrastructure.RepositoryImplementations;
 
 public sealed class MatchRepository(ApplicationDbContext context) : IMatchRepository
 {

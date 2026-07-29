@@ -1,13 +1,12 @@
 using Application;
 using Domain.Entities;
-using Infrastracture;
-using Infrastracture.Data;
-using Infrastracture.Seed;
+using Infrastructure;
+using Infrastructure.Data;
+using Infrastructure.Seed;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using SPQatar2027.Behaviors;
 using SPQatar2027.Extensions;
 using SPQatar2027.Logging;
@@ -62,7 +61,7 @@ builder.Services.ConfigureOptions<JwtBearerIdentityOptionsSetup>();
 
 builder.Services.AddIdentityCore<User>() //konfiguracija identity servisa
    .AddRoles<IdentityRole>() //dodavanje podrske za role
-   //.AddTokenProvider<DataProtectorTokenProvider<User>>("") //dodavanje token provajdera
+                             //.AddTokenProvider<DataProtectorTokenProvider<User>>("") //dodavanje token provajdera
    .AddEntityFrameworkStores<AuthDbContext>() //podesavanje entity framework skladista
    .AddDefaultTokenProviders(); //dodavanje podrazumevanih token provajdera
 

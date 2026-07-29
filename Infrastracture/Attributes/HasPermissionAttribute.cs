@@ -1,12 +1,7 @@
-﻿using Infrastracture.Constants;
+﻿using Infrastructure.Constants;
 using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Infrastracture.Attributes;
+namespace Infrastructure.Attributes;
 
 public sealed class HasPermissionAttribute : AuthorizeAttribute
 {

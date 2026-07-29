@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Infrastracture.Migrations
+namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class ChangeIsForfeitMatchToBeNotNullable : Migration

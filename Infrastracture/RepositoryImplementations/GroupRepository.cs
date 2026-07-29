@@ -1,9 +1,9 @@
 ﻿using Domain.Entities;
 using Domain.RepositoryInterfaces;
-using Infrastracture.Data;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastracture.RepositoryImplementations;
+namespace Infrastructure.RepositoryImplementations;
 
 internal sealed class GroupRepository : IGroupRepository
 {

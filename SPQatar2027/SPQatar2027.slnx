@@ -2,7 +2,7 @@
   <Project Path="../Application/Application.csproj" />
   <Project Path="../Core/Core.csproj" Id="2cae20c1-92c7-4fbf-b693-9a186db4c458" />
   <Project Path="../Domain/Domain.csproj" />
-  <Project Path="../Infrastracture/Infrastracture.csproj" />
+  <Project Path="../Infrastracture/Infrastructure.csproj" />
   <Project Path="../UnitTests/UnitTests.csproj" />
   <Project Path="SPQatar2027.csproj" />
 </Solution>

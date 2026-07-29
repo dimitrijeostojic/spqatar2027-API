@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Infrastracture.Seed;
+namespace Infrastructure.Seed;
 
 public static class StadiumSeeder
 {

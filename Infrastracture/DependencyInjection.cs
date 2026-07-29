@@ -1,11 +1,11 @@
 ﻿using Domain.Abstraction;
 using Domain.RepositoryInterfaces;
-using Infrastracture.Data;
-using Infrastracture.RepositoryImplementations;
+using Infrastructure.Data;
+using Infrastructure.RepositoryImplementations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Infrastracture;
+namespace Infrastructure;
 
 public static class DependencyInjection
 {

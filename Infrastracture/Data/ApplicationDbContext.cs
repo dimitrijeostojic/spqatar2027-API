@@ -2,7 +2,7 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastracture.Data;
+namespace Infrastructure.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options), IUnitOfWork
 {
@@ -57,7 +57,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         catch
         {
             await transaction.RollbackAsync();
-            
+
         }
     }
 }

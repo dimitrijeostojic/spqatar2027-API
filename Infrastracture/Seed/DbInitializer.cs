@@ -1,7 +1,7 @@
-﻿using Infrastracture.Data;
+﻿using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastracture.Seed;
+namespace Infrastructure.Seed;
 
 public static class DbInitializer
 {

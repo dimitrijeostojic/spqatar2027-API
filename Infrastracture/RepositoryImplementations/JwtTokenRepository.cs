@@ -1,17 +1,13 @@
 ﻿using Domain.Entities;
 using Domain.RepositoryInterfaces;
-using Infrastracture.Options;
+using Infrastructure.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Infrastracture.RepositoryImplementations;
+namespace Infrastructure.RepositoryImplementations;
 
 public sealed class JwtTokenRepository(IOptions<JwtOptions> options) : IJwtTokenRepository
 {
