@@ -4,7 +4,7 @@ using Domain.Abstraction;
 using Domain.RepositoryInterfaces;
 using MediatR;
 
-namespace Application.Match.RecordResult;
+namespace Application.Match.RecordMatchResult;
 
 public sealed class RecordMatchResultRequestHandler(IMatchRepository matchRepository, IUnitOfWork unitOfWork)
     : IRequestHandler<RecordMatchResultRequest, Result<RecordMatchResultResponse>>

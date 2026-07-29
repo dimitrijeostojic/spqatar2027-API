@@ -47,16 +47,16 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
     public async Task ExecuteInTransactionAsync(Func<Task> action, CancellationToken cancellationToken = default)
     {
-        using var transaction = await base.Database.BeginTransactionAsync();
+        using var transaction = await Database.BeginTransactionAsync(cancellationToken);
 
         try
         {
             await action();
-            await transaction.CommitAsync();
+            await transaction.CommitAsync(cancellationToken);
         }
         catch
         {
-            await transaction.RollbackAsync();
+            await transaction.RollbackAsync(cancellationToken);
 
         }
     }

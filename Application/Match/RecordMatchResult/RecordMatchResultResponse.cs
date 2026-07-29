@@ -1,4 +1,4 @@
-﻿namespace Application.Match.RecordResult;
+﻿namespace Application.Match.RecordMatchResult;
 
 public sealed class RecordMatchResultResponse
 {

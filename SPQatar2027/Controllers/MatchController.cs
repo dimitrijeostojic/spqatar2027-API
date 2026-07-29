@@ -1,7 +1,7 @@
 ﻿using Application.Match.Create;
 using Application.Match.ForfeitMatch;
 using Application.Match.GetMatches;
-using Application.Match.RecordResult;
+using Application.Match.RecordMatchResult;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

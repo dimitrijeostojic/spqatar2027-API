@@ -1,7 +1,7 @@
 ﻿using Core;
 using MediatR;
 
-namespace Application.Match.RecordResult;
+namespace Application.Match.RecordMatchResult;
 
 public sealed class RecordMatchResultRequest : IRequest<Result<RecordMatchResultResponse>>
 {
