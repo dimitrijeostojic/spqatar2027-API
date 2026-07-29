@@ -20,5 +20,5 @@ public class Result
     public Error Error { get; }
 
     public static Result Success() => new(true, Error.None);
-    public static Result Failure(Error error) => new(false, error);
+    public static Result Fail(Error error) => new(false, error);
 }
