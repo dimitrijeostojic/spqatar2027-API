@@ -3,10 +3,9 @@ using Application.Team.Delete;
 using Application.Team.GetAll;
 using Application.Team.GetById;
 using Application.Team.Update;
-using Infrastracture.Attributes;
+using Infrastructure.Attributes;
 using Infrastructure.Constants;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SPQatar2027.Common;
 
